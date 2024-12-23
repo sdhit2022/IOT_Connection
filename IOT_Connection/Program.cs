@@ -1,4 +1,15 @@
+using IOT_Connection.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<IOT_DBContext>(option =>
+{
+    option.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"));
+    option.EnableSensitiveDataLogging();
+
+});
 
 // Add services to the container.
 builder.Services.AddRazorPages();
